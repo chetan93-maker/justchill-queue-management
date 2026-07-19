@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ArrowRight, PlayCircle, Sparkles } from 'lucide-react'
+
+const MotionLink = motion(Link)
 
 const container = {
   hidden: {},
@@ -121,15 +124,15 @@ function Hero() {
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
-            <motion.a
-              href="#pricing"
+            <MotionLink
+              to="/register"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-fuchsia-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/30 hover:shadow-xl hover:shadow-brand-500/40 transition-shadow"
             >
               Start free trial
               <ArrowRight className="h-4 w-4" />
-            </motion.a>
+            </MotionLink>
             <a
               href="#how-it-works"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-ink-700 dark:text-ink-100 hover:text-ink-900 dark:hover:text-white transition-colors"

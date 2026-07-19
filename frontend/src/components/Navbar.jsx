@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Menu, Moon, Sun, X, Zap } from 'lucide-react'
 
+const MotionLink = motion(Link)
+
 const NAV_LINKS = [
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#how-it-works' },
@@ -116,14 +118,14 @@ function Navbar() {
               Log in
             </Link>
 
-            <motion.a
-              href="#book-queue"
+            <MotionLink
+              to="/register"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               className="relative overflow-hidden rounded-full bg-gradient-to-r from-brand-500 to-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/30 transition-shadow duration-300 hover:shadow-xl hover:shadow-brand-500/40"
             >
               Book Queue
-            </motion.a>
+            </MotionLink>
           </div>
 
           {/* Mobile controls */}
@@ -213,13 +215,13 @@ function Navbar() {
                 >
                   Log in
                 </Link>
-                <a
-                  href="#book-queue"
+                <Link
+                  to="/register"
                   onClick={() => setMenuOpen(false)}
                   className="w-full text-center rounded-full bg-gradient-to-r from-brand-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-500/30"
                 >
                   Book Queue
-                </a>
+                </Link>
               </div>
             </motion.div>
           </motion.div>
