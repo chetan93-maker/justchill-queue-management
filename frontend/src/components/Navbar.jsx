@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Menu, Moon, Sun, X, Zap } from 'lucide-react'
 
 const NAV_LINKS = [
@@ -13,7 +14,12 @@ const NAV_LINKS = [
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === 'undefined') return true
+
+    const savedTheme = window.localStorage.getItem('theme')
+    return savedTheme ? savedTheme === 'dark' : true
+  })
 
   // Track scroll position to switch the navbar from transparent to glass
   useEffect(() => {
@@ -31,11 +37,17 @@ function Navbar() {
     }
   }, [menuOpen])
 
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark)
+  }, [isDark])
+
+  useEffect(() => {
+    window.localStorage.setItem('theme', isDark ? 'dark' : 'light')
+  }, [isDark])
+
   // Apply / remove the `dark` class on <html> for Tailwind's class-based dark mode
   const toggleDarkMode = () => {
-    const next = !isDark
-    setIsDark(next)
-    document.documentElement.classList.toggle('dark', next)
+    setIsDark((prev) => !prev)
   }
 
   return (
@@ -97,12 +109,12 @@ function Navbar() {
               </AnimatePresence>
             </button>
 
-            <a
-              href="#login"
+            <Link
+              to="/login"
               className="px-4 py-2 text-sm font-medium text-ink-700 dark:text-ink-100 transition-colors duration-200 hover:text-ink-900 dark:hover:text-white"
             >
               Log in
-            </a>
+            </Link>
 
             <motion.a
               href="#book-queue"
@@ -194,13 +206,13 @@ function Navbar() {
               </ul>
 
               <div className="px-6 py-6 border-t border-ink-100 dark:border-white/10 flex flex-col gap-3">
-                <a
-                  href="#login"
+                <Link
+                  to="/login"
                   onClick={() => setMenuOpen(false)}
                   className="w-full text-center rounded-full border border-ink-200 dark:border-white/15 px-5 py-3 text-sm font-medium text-ink-700 dark:text-ink-100"
                 >
                   Log in
-                </a>
+                </Link>
                 <a
                   href="#book-queue"
                   onClick={() => setMenuOpen(false)}
