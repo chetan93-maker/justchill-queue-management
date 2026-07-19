@@ -1,16 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, Eye, EyeOff, Lock, Mail } from 'lucide-react'
+import { ArrowRight, Check, ChevronLeft, Eye, EyeOff, Lock, Mail } from 'lucide-react'
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false)
-
-  const features = [
-    { title: 'Real-time Analytics', subtitle: 'Track queue performance live' },
-    { title: 'Digital Ticketing', subtitle: 'Manage service touchpoints' },
-    { title: 'Queue Optimization', subtitle: 'Shorten customer wait times' },
-    { title: 'Predictive Insights', subtitle: 'Stay ahead of demand' },
-  ]
 
   return (
     <div className="min-h-screen bg-[#04050f] text-white">
@@ -30,14 +23,11 @@ function Login() {
                   </div>
 
                   <div className="mx-auto max-w-sm overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d1325]/80 p-6 shadow-[0_35px_90px_rgba(15,23,42,0.35)] sm:max-w-none">
-                    <div className="relative aspect-square overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-slate-950 via-slate-900 to-[#211a3a]">
+                    <div className="relative aspect-[1/0.66] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-slate-950 via-slate-900 to-[#211a3a]">
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.08),transparent_40%)]" />
                       <div className="absolute left-8 top-8 h-24 w-24 rounded-full bg-[#8b5cf6]/30 blur-3xl" />
                       <div className="absolute right-8 bottom-10 h-20 w-20 rounded-full bg-[#ec4899]/30 blur-3xl" />
-                      <div className="absolute inset-x-0 top-20 mx-auto h-40 w-40 rounded-[3rem] bg-gradient-to-br from-[#4f46e5] via-[#312e70] to-[#1b1632] shadow-[inset_0_0_90px_rgba(255,255,255,0.08)]">
-                        <div className="absolute -left-6 top-6 h-16 w-16 rounded-full bg-[#8b5cf6]/30 blur-2xl" />
-                        <div className="absolute right-6 bottom-6 h-16 w-16 rounded-full bg-[#ec4899]/30 blur-2xl" />
-                      </div>
+                      <div className="absolute inset-x-0 top-12 mx-auto h-44 w-4/5 rounded-[2.25rem] bg-[#f3f4ff]/10 shadow-[inset_0_0_90px_rgba(255,255,255,0.08)]" />
                     </div>
                   </div>
 
@@ -52,13 +42,13 @@ function Login() {
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                  {features.map((feature) => (
-                    <div key={feature.title} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.3)]">
-                      <div className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-white/5 text-brand-300">
-                        <Check className="h-4 w-4" />
-                      </div>
-                      <p className="mt-4 text-sm font-semibold text-white">{feature.title}</p>
-                      <p className="mt-2 text-sm text-white/60">{feature.subtitle}</p>
+                  {[
+                    { title: 'Real-time Analytics', description: 'Track queue performance live' },
+                    { title: 'Predictive Insights', description: 'Stay ahead of demand' },
+                  ].map((item) => (
+                    <div key={item.title} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.3)]">
+                      <p className="text-sm font-semibold text-white">{item.title}</p>
+                      <p className="mt-2 text-sm text-white/60">{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -69,28 +59,28 @@ function Login() {
 
             <div className="relative flex items-center justify-center px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
               <div className="relative z-10 w-full max-w-md">
-                <div className="mb-6">
-                  <p className="text-xs uppercase tracking-[0.35em] text-white/50">Welcome back</p>
-                  <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Welcome back</h2>
-                  <p className="mt-3 text-sm text-white/70">Enter your credentials to access your workspace.</p>
+                <div className="mb-6 flex items-center justify-between gap-3">
+                  <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                    Back to home
+                  </Link>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[11px] uppercase tracking-[0.35em] text-white/60">
+                    Login
+                  </span>
                 </div>
 
-                <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#060712] p-6 shadow-[0_40px_70px_rgba(0,0,0,0.3)] sm:p-8">
-                  <div className="mb-6 flex justify-between">
-                    <Link
-                      to="/"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10"
-                    >
-                      <span className="text-xl">←</span>
-                      Back to home
-                    </Link>
-                    <span className="self-center rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[11px] uppercase tracking-[0.35em] text-white/60">
-                      Login
-                    </span>
+                <div className="rounded-[2rem] border border-white/10 bg-[#0f1222] p-6 shadow-[0_40px_70px_rgba(0,0,0,0.3)] sm:p-8">
+                  <div className="space-y-3 text-center">
+                    <p className="text-xs font-semibold uppercase tracking-[0.4em] text-brand-300">Welcome back</p>
+                    <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Welcome back</h2>
+                    <p className="text-sm leading-6 text-white/70">Enter your credentials to access your workspace.</p>
                   </div>
 
-                  <form className="space-y-6">
-                    <div className="space-y-2">
+                  <form className="mt-8 space-y-6">
+                    <div className="space-y-3">
                       <label className="block text-sm font-medium text-white/80">Email Address</label>
                       <div className="relative rounded-[1.5rem] border border-white/20 bg-[#060812] px-4 py-3">
                         <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
@@ -102,7 +92,7 @@ function Login() {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <div className="flex items-center justify-between text-sm font-medium text-white/80">
                         <span>Password</span>
                         <a href="#" className="text-sm text-brand-300 transition hover:text-brand-200">
@@ -172,7 +162,7 @@ function Login() {
 
                 <p className="text-center text-sm text-white/60">
                   Don&apos;t have an account?{' '}
-                  <Link to="/" className="font-semibold text-brand-300 transition hover:text-brand-200">
+                  <Link to="/register" className="font-semibold text-brand-300 transition hover:text-brand-200">
                     Get started for free
                   </Link>
                 </p>
